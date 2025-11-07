@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1" />
+    <title> Sistema Biblioteca </title>
+    <link rel="stylesheet" href="styles.css"> <!--Conecta o arquivo HTML ao arquivo CSS-->
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="brand"> Sistema Biblioteca - Login </div>
+        </header>
+
+        <!--PÁGINA PRINCIPAL: opções Entrar/Cadastrar-->
+        <section id="page-home" class="section active card">
+            <h3> Bem-vindo(a)! Escolha uma opção</h3>
+            <div style="display: flex; gap: 10px; margin-top: 12px;">
+                <button class="btn btn-primary" id="btn-open-login"> Entrar </button>
+                <button class="btn btn-ghost" id="btn-open-register">Cadastrar-se (Cliente)</button>
+            </div>
+
+        </section>
+
+        <!--Login-->
+        <section id="page-login" class="section card">
+            <h3>Entrar</h3>
+            <div class="form-field">
+                <label>CPF:</label>
+                <input type="text" id="login-cpf" placeholder="Digite o CPF ">
+            </div>
+            <div class="form-field">
+                <label>Senha:</label>
+                <input type="password" id="login-senha" placeholder="Digite a senha ">
+            </div>
+            <div id="login-msg" class="hint"></div>
+            <div style="margin-top: 10px;">
+                <button class="btn btn-primary" id="btn-login"> Entrar </button>
+                <button class="btn btn-ghost" id="btn-login-cancel"> Cancelar </button>
+            </div>
+        </section>
+
+        <!--Cadastro(Cliente)-->
+        <section id="page-register" class="section card">
+            <h3> Cadastrar como Cliente</h3>
+            <div class="form-field"><label>CPF: </label><input id="reg-cpf" placeholder="Digite o CPF"></div>
+            <div class="form-field"><label>Nome: </label><input id="reg-nome" placeholder="Digite o nome"></div>
+            <div class="form-field"><label>Email: </label><input id="reg-email" placeholder="Digite o email"></div>
+            <div class="form-field"><label>Telefone: </label><input id="reg-telefone" placeholder="Digite o telefone"></div>
+            <div class="form-field"><label>Senha: </label><input type="password" id="reg-pass" placeholder="Digite a senha"></div>
+            <div id="reg-msg" class="hint"></div>
+            <div style="margin-top: 10px;">
+                <button class="btn btn-primary" id="btn-register"> Entrar </button>
+                <button class="btn btn-ghost" id="btn-register-cancel" > Cancelar </button>
+            </div>
+        </section>
+
+        <!--Área do cliente-->
+        <section id="page-client" class="section card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3> Área do Cliente </h3>
+                <div><button class="btn btn-ghost" id="btn-logout-client"> Sair </button></div>
+            </div>
+            <p class="hint"> Se houver atraso, a linha ficará vermelha e mostrará multa de R$2,00. </p>
+            <div class="card" style="margin-top: 10px;">
+                <h4> Empréstimos </h4>
+                <table class="table" id="client-loans-table">
+                    <thead>
+                        <tr><th> Livro </th>
+                            <th> Data Empréstimo</th>
+                            <th> Data Devolução </th>
+                            <th> Multa </th>
+                        </tr>
+                        <tbody></tbody>
+                    </thead>
+                </table>
+            </div>
+        </section>
+
+        <!--Área do Funcionário-->
+        <section id="page-employee" class="section card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3> Área do Funcionário </h3>
+                <div>
+                    <button class="btn btn-ghost" id="btn-logout-emp"> Sair </button>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="btn" id="btn-emp-cad-func"> Cadastrar Funcionário </button>
+                <button class="btn" id="btn-emp-realizar-emprestimo"> Realizar Empréstimo </button>
+                <button class="btn" id="btn-emp-comunicar-aviso"> Comunicar Aviso </button>
+            </div>
+
+            <!--Sub áreas: cadastra funcionário / realizar empréstimo / comunicar aviso-->
+            <div id="emp-cad-func" class="emp-area hidden card">
+                <h4> Cadastrar Funcionário </h4>
+                <div class="form-field"><label> CPF </label><input id="ef-cpf" placeholder="Digite o CPF"></div>
+                <div class="form-field"><label> Nome </label><input id="ef-nome" placeholder="Digite o nome"></div>
+                <div class="form-field"><label> Email</label><input id="ef-email" placeholder="Digite o e-mail"></div>
+                <div class="form-field"><label> Telefone </label><input id="ef-tel" placeholder="Digite o telefone"></div>
+                <div class="form-field"><label> Senha </label><input type="password" id="ef-pass" placeholder="Digite a senha"></div>
+                <div id="ef-mg" class="hint"></div>
+                <div style="margin-top: 8px;"><button class="btn btn-primary" id="ef-save">Salvar Funcionário </button></div>
+            </div>
+        
+
+        <!--Realizar empréstimo: abas-->
+        
+            <div id="emp-emprestimo-flow" class="emp-area hidden card">
+                <h4> Realizar Empréstimo - Fluxo em abas </h4>
+                <div class="tabs" id="flow-tabs">
+                    <div class="tab active" data-tab="tab-book"> Livro </div>
+                    <div class="tab active" data-tab="tab-cat"> Categoria </div>
+                    <div class="tab active" data-tab="tab-link"> Livro-Categoria </div>
+                    <div class="tab active" data-tab="tab-phone"> Telefone </div>
+                    <div class="tab active" data-tab="tab-loan"> Empréstimo </div>
+                </div>
+
+                <div id="tab-book" class="flow-tab">
+                    <h5> Livro </h5>
+                    <div class="form-field"><label>Título</label><input id="flow-book-title" placeholder="Digite o título"></div>
+                    <div class="form-field"><label>ISBN</label><input id="flow-book-isbn" placeholder="Digite o ISBN"></div>
+                    <div><button class="btn btn-primary" id="flow-book-save">Salvar Livro</button></div>
+                    <div id="flow-book-msg" class="hint"></div>
+                </div>
+
+                <div id="tab-cat" class="flow-tab hidden">
+                    <h5>Categoria</h5>
+                    <div class="form-field"><label>Nome</label><input id="flow-cat-nome" placeholder="Digite o nome"></div>
+                    <div class="form-field"><label>Código</label><input id="flow-cat-cod" type="number" placeholder="Digite o código"></div>
+                    <div><button class="btn btn-primary" id="flow-cat-save"> Salvar Categoria </button></div>
+                    <div id="flow-cat-msg" class="hint"></div>
+                </div>
+
+                <div id="tab-link" class="flow-tb-hidden">
+                    <h5> Livro ⇄ Categoria</h5>
+                    <div class="form-field"><label>ISBN (livro)</label><input id="flow-link-isbn" placeholder="Digite o ISBN"></div>
+                    <div class="form-field"><label>Código (categoria)</label><input id="flow-link-code" placeholder="Digite o código" type="number"></div>
+                    <div><button class="btn btn-primary" id="flow-link-save">Vincular</button></div>
+                    <div id="flow-link-msg" class="hint"></div>
+                </div>
+
+                <div id="tab-phone" class="flow-tab-hidden">
+                    <h5> Telefone (definir cliente) </h5>
+                    <div class="form-field"><label>CPF do cliente </label><input id="flow-phone-cpf" placeholder="Digite o CPF"></div>
+                    <div class="form-field"><label>Telefone</label><input id="flow-phone-num" placeholder="Digite o telefone"></div>
+                    <div><button class="btn btn-primary" id="flow-phone-save">Salvar contato</button></div>
+                    <div id="flow-phone-msg" class="hint"></div>
+                </div>
+
+                <div id="tab-loan" class="flow-tb-hidden">
+                    <h5>Registrar empréstimo</h5>
+                    <div class="form-field"><label>CPF do cliente (preenchido automaticamente)</label><input id="flow-loan-cpf" placeholder="Preenchido automático"></div>
+                    <div class="form-field"><label> ISBN do livro </label><input id="flow-loan-isbn" placeholder="Digite o ISBN"></div>
+                    <div class="form-field"><label> Data Empréstimos </label><input type="date" id="flow-loan-date"></div>
+                    <div class="form-field"><label> Data Devolução </label><input type="date" id="flow-loan-due"></div>
+                    <div id="flow-loan-msg" class="hint"></div>
+                    <div><button class="btn btn-primary" id="flow-loan-save">Registrar Empréstimo</button></div>
+                </div>
+            </div>
+
+        <!--Comunicar Aviso-->
+            <div id="emp-avisos" class="emp-area hidden card">
+                <h4>Comunicar Avisos</h4>
+                <p class="hint">Empréstimos atrasados destacados em vermelho. Clique em "Enviar Aviso" para simular envio.</p>
+                <table class="table" id="avisos-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Livro</th>
+                            <th>Data Devolução</th>
+                            <th>Situação</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        </section>
+        <div id="global-msg" class="hint" style="margin-top: 8px;"></div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
