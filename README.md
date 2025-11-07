@@ -10,5 +10,5 @@ Projeto integrador desenvolvido por **Luiza Santos**, **Giovanna**, **Cauê Luca
 ## Funcionalidades atuais
 - Conexão com banco de dados PostgreSQL
 - Cadastro e login de pessoas (clientes e funcionários)
-- CRUD da tabela Pessoa e livro
+- CRUD da TABELA Pessoa e livro
 - Uma parte do front(contendo: CSS e HTML)
