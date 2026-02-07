@@ -1,4 +1,4 @@
-// Importa bibliotecas e conexão com o banco
+
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
@@ -102,6 +102,26 @@ router.get('/', async (req, res) => {
     res.status(500).send('Erro ao listar pessoas: ' + err.message);
   }
 });
+
+//ADICIONEI ISSO AGORAAA, CASO DE ERRO É SO TIRAR
+
+// LISTAR APENAS FUNCIONÁRIOS
+router.get('/funcionario', async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT cpf, nome, email, telefone, tipo FROM pessoa WHERE tipo = 'funcionario' ORDER BY nome"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).send('Erro ao listar funcionários: ' + err.message);
+  }
+});
+
+
+
+
+
+
 
 //  BUSCAR PESSOA POR CPF
 
